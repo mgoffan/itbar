@@ -11,3 +11,4 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 # API
 
 GET		/api						controllers.Application.api()
+POST	/api/item					controllers.Application.createItem()
