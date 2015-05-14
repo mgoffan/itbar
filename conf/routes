@@ -12,3 +12,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET		/api						controllers.Application.api()
 POST	/api/item					controllers.Application.createItem()
+GET		/api/item/:id				controllers.Application.getItem(id: Long)
+POST	/api/item/:id/pic			controllers.Application.addPicToItem(id: Long)

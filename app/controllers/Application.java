@@ -2,13 +2,14 @@ package controllers;
 
 import java.util.List;
 
-import play.*;
+
 import play.libs.Json;
 import play.mvc.*;
-import scala.collection.immutable.Seq;
+
 import views.html.*;
 import models.MenuItem;
-import play.api.libs.json.*;
+import models.Pic;
+
 import play.data.Form;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,20 +54,56 @@ public class Application extends Controller {
     	
     	if(filledForm.hasErrors()) {
     		
-    		result.put("err", 3);
+    		result.put("err", ErrorCodes.RESPONSE_ERROR);
     		result.put("msg", filledForm.errorsAsJson());
     		
     		return badRequest(result);
     	} else {
     		MenuItem.create(filledForm.get());
     		
-    		result.put("err", 0);
+    		result.put("err", ErrorCodes.RESPONSE_OK);
     		result.put("msg", "Operacion OK");
     		result.put("result", Json.toJson(filledForm.get()));
     		
     		return ok(result);  
     	}
     	
+    }
+    
+    public static Result addPicToItem(Long id) {
+    	
+    	Form<Pic> filledForm = Form.form(Pic.class).bindFromRequest();
+    	
+    	ObjectNode result = Json.newObject();
+    	
+    	if(filledForm.hasErrors()) {
+    		
+    		result.put("err", ErrorCodes.RESPONSE_ERROR);
+    		result.put("msg", filledForm.errorsAsJson());
+    		
+    		return badRequest(result);
+    	} else {
+    		
+    		Pic.create(filledForm.get(), id);
+    		
+    		result.put("err", ErrorCodes.RESPONSE_OK);
+    		result.put("msg", "Operacion OK");
+    		result.put("result", Json.toJson(MenuItem.find().byId(id)));
+    		
+    		return ok(result);  
+    	}
+    }
+    
+    public static Result getItem(Long id) {
+    	
+    	
+    	ObjectNode result = Json.newObject();
+    	
+    	result.put("err", ErrorCodes.RESPONSE_OK);
+    	result.put("msg", "Operacion OK");
+    	result.put("result", Json.toJson(MenuItem.find().byId(id)));
+    		
+    	return ok(result);
     }
 
 }
