@@ -1,4 +1,4 @@
-# ITBar
+# ITBAr
 
 Proyecto de POO
 
@@ -32,3 +32,4 @@ A su vez, opcionalmente, implementaremos el sistema para PC del bar. El sistema 
 * [Tutorial Parte 2](https://www.playframework.com/documentation/2.1.1/JavaGuide4)
 * [Tutorial Parte 3](https://www.playframework.com/documentation/2.1.1/JavaGuide5)
 * [Tutorial Parte 4](https://www.playframework.com/documentation/2.1.1/JavaGuide7)
+* [Relaciones](http://stackoverflow.com/questions/21202490/ebean-query-by-onetomany-relationship)

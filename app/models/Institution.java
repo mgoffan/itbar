@@ -28,6 +28,16 @@ public class Institution extends Model {
 	@OneToMany
 	private List<Bar> bars;
 
+	public Institution(String name, Bar bar) {
+		this.name = name;
+		this.bars.add(bar);
+	}
+	
+	public Institution(String name, Long bar) {
+		this.name = name;
+		this.bars.add(Bar.find().byId(bar));
+	}
+	
 	/**
 	 * @return the name
 	 */
@@ -40,5 +50,29 @@ public class Institution extends Model {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * 
+	 * @return bars
+	 */
+	public List<Bar> getBars() {
+		return bars;
+	}
+	
+	/**
+	 * 
+	 * @param bars
+	 */
+	public void setBars(List<Bar> bars) {
+		this.bars = bars;
+	}
+	
+	/**
+	 * Finder 
+	 * @return Finder que se utiliza para las busquedas en la DB
+	 */
+	public static Finder<Long, Institution> find() {
+		return new Finder<Long, Institution>(Long.class, Institution.class);
 	}
 }
